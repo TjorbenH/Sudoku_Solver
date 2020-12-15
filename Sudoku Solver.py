@@ -16,21 +16,25 @@ class field:
     def __str__(self):
         r = str(self.y)+","+str(self.x)+": "+str(self.origin)+" "+str(self.c)
         return r
-
+    
+    #####checkes wich values would be valid according to the soduko rules #####
     def check(self,p):
         global sudoku
         self.to_check = []
-        #x reihe checken
+        
+        #check row
         for i in range(len(sudoku[self.y])):
             test_value = sudoku[self.y][i]
             if test_value in p:
                 p.remove(test_value)
-        #y reihe checken
+               
+        #check column
         for i in range(len(sudoku)):
             test_value = sudoku[i][self.x]
             if test_value in p:
                 p.remove(test_value)
-        #kästchen checken
+         
+        #check all imidiate neighbours
         if self.x == 0 or self.x == 3 or self.x == 6:
             self.to_check.append([0,1,2])
         elif self.x == 1 or self.x == 4 or self.x == 7:
@@ -50,7 +54,8 @@ class field:
                 v = sudoku[y][x]
                 if v in p:
                     p.remove(v)
-
+     
+    #####checks for valid values and does through them one by one#####
     def update(self):
         global curser
         global sudoku
@@ -70,11 +75,13 @@ class field:
         curser += 1
         changed = True
 
+#####quick way to print the sudoku state#####
 def printL():
     for i in sudoku:
         print(i)
     print()
 
+#####checkes if the curent sudoku is identical with the solution#####
 def test():
     global sodoku
     global solved
@@ -82,10 +89,11 @@ def test():
     if sudoku == sudoku_lösung:
         printL()
         solved = True
-        print("Let's go Tjorben, you're the best")
+        print("Soduku Solved")
         exit(0)
 
-#############Main######################
+#####This is a Test Sudoku so you can plug and play this programm ######
+
 sudoku = [
     [0, 1, 2, 0, 0, 0, 5, 7, 0],
     [6, 0, 0, 5, 0, 1, 0, 0, 4],
@@ -109,30 +117,6 @@ sudoku_lösung = [
     [2, 3, 8, 7, 6, 5, 9, 4, 1]
 ]
 
-sudoku_lösung = [
-    [5, 3, 4, 6, 7, 8, 9, 1, 2],
-    [6, 7, 2, 1, 9, 5, 3, 4, 8],
-    [1, 9, 8, 3, 4, 2, 5, 6, 7],
-    [8, 5, 9, 7, 6, 1, 4, 2, 3],
-    [4, 2, 6, 8, 5, 3, 7, 9, 1],
-    [7, 1, 3, 9, 2, 4, 8, 5, 6],
-    [9, 6, 1, 5, 3, 7, 2, 8, 4],
-    [2, 8, 7, 4, 1, 9, 6, 3, 5],
-    [3, 4, 5, 2, 8, 6, 1, 7, 9]]
-
-sudoku = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]]
-
-
-
 #####main######
 #####inits#####
 solved = False
@@ -150,6 +134,7 @@ for y in range(len(sudoku)):
 next = fields[curser]
 printL()
 input("start?")
+
 #####loop######
 while 1:
     for f in fields:
