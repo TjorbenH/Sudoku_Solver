@@ -12,7 +12,7 @@ class field:
         self.check(self.possible)
         self.check(self.origin)
         self.variable = True
-
+    #####just for debugging purposes#####
     def __str__(self):
         r = str(self.y)+","+str(self.x)+": "+str(self.origin)+" "+str(self.c)
         return r
