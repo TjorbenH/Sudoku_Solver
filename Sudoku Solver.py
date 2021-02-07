@@ -1,3 +1,5 @@
+import time
+
 
 #####class wich is going to represent fiels on the sudoku grid#####
 class field:
@@ -134,6 +136,7 @@ print_sudoku()
 input("start?")
 
 #####loop######
+start = time.time()
 while 1:
     for f in fields:
         f.update() #updating every single field object
@@ -141,6 +144,6 @@ while 1:
             break
     changed = False
     test() #checking if the sudoku is solved
-
+print("solved in: " time.time() -start)
 
 
