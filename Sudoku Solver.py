@@ -144,6 +144,6 @@ while 1:
             break
     changed = False
     test() #checking if the sudoku is solved
-print("solved in: " time.time() -start)
+print("solved in: ", time.time() -start)
 
 
